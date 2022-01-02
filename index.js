@@ -46,7 +46,9 @@ app.get("/salons/:id", async (req, res) => {
 });
 
 app.post("/salons", async (req, res) => {
-  res.send(req.body);
+  const salon = new Salon(req.body.salon);
+  await salon.save();
+  res.redirect(`/salons/${salon._id}`);
 });
 
 app.listen(3000, () => {
