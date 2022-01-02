@@ -16,17 +16,37 @@ const app = express();
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
+app.use(express.urlencoded({ extended: true }));
+
 app.get("/", (req, res) => {
   res.render("home");
 });
 
-app.get("/addsalon", async (req, res) => {
-  const shop = new Salon({
-    title: "Better Cut",
-    description: "Stylish cuts and stimulating conversation",
-  });
-  await shop.save();
-  res.send(shop);
+// app.get("/addsalon", async (req, res) => {
+//   const shop = new Salon({
+//     title: "Better Cut",
+//     description: "Stylish cuts and stimulating conversation",
+//   });
+//   await shop.save();
+//   res.send(shop);
+// });
+
+app.get("/salons", async (req, res) => {
+  const salons = await Salon.find({});
+  res.render("salons/index", { salons });
+});
+
+app.get("/salons/new", async (req, res) => {
+  res.render("salons/new");
+});
+
+app.get("/salons/:id", async (req, res) => {
+  const salon = await Salon.findById(req.params.id);
+  res.render("salons/show", { salon });
+});
+
+app.post("/salons", async (req, res) => {
+  res.send(req.body);
 });
 
 app.listen(3000, () => {
