@@ -2,7 +2,12 @@
 <div class="row">
   <h1 class="text-center">Edit Salon</h1>
   <div class="col-6 offset-3">
-    <form action="/salons/<%= salon._id  %>?_method=PUT " method="post">
+    <form
+      action="/salons/<%= salon._id  %>?_method=PUT "
+      method="post"
+      novalidate
+      class="validated-form"
+    >
       <div class="mb-3">
         <label class="form-label" for="title">Title</label>
         <input
@@ -10,18 +15,27 @@
           type="text"
           name="salon[title]"
           id="title"
-          value="<%= salon.title  %>"
+          value="<%= salon.title  %> "
+          required
         />
+        <div class="valid-feedback">Looks Good</div>
+        <div class="invalid-feedback">Please enter the name of your shop</div>
       </div>
       <div class="mb-3">
-        <label class="form-label" for="description">Description</label>
-        <input
-          class="form-control"
-          type="text"
-          name="salon[description]"
+        <label class="form-label" for="description">Type</label>
+        <select
           id="description"
-          value="<%= salon.description  %>"
-        />
+          class="form-select"
+          name="salon[description]"
+          required
+        >
+          <option selected disabled value="">Select One</option>
+          <option value="Barbershop">Barbershop</option>
+          <option value="Salon">Salon</option>
+          <option value="Hybrid">Hybrid</option>
+        </select>
+        <div class="valid-feedback">Looks Good</div>
+        <div class="invalid-feedback">Please select one</div>
       </div>
       <div class="mb-3">
         <button class="btn btn-success">Update Salon</button>
@@ -32,3 +46,28 @@
     </footer>
   </div>
 </div>
+<script>
+  // Example starter JavaScript for disabling form submissions if there are invalid fields
+  (function () {
+    "use strict";
+
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    const forms = document.querySelectorAll(".validated-form");
+
+    // Loop over them and prevent submission
+    Array.from(forms).forEach(function (form) {
+      form.addEventListener(
+        "submit",
+        function (event) {
+          if (!form.checkValidity()) {
+            event.preventDefault();
+            event.stopPropagation();
+          }
+
+          form.classList.add("was-validated");
+        },
+        false
+      );
+    });
+  })();
+</script>
