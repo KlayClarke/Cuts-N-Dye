@@ -9,10 +9,13 @@
 <div class="row">
   <div class="col-6 offset-3">
     <div class="card">
-      <div class="card-header"><%= salon.description %></div>
+      <div class="card-header"><%= salon.salonType %></div>
       <div class="card-body">
-        <h5 class="card-title"><%= salon.title %></h5>
-        <p class="card-text">Building #, Street #, City, State, Zip Code</p>
+        <h5 class="card-title"><%= salon.salonName %></h5>
+        <p class="card-text">
+          <%= `${salon.salonStreetAddress} ${salon.salonCity},
+          ${salon.salonState} ${salon.salonZipCode}` %>
+        </p>
         <a href="#" class="btn btn-primary mb-3">Find On Google Maps</a>
         <div>
           <a href="/salons/<%= salon._id %>/edit " class="btn btn-warning mb-3"
