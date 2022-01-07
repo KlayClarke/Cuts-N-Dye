@@ -1,7 +1,9 @@
 <% layout('layouts/boilerplate') %>
-<h1>All Salons</h1>
+
 <div>
-  <a href="/salons/new">Add Salon</a>
+  <span>
+    <h3>All</h3>
+  </span>
 </div>
 
 <% for(let salon of salons) { %>
@@ -21,7 +23,7 @@
             ${salon.salonState} ${salon.salonZipCode}` %></small
           >
         </p>
-        <a class="btn btn-primary" href=" /salons/<%= salon._id  %>  "
+        <a class="btn btn-light" href=" /salons/<%= salon._id  %>  "
           >View <%= salon.title %>
         </a>
       </div>
@@ -30,3 +32,4 @@
 </div>
 
 <% }%>
+<h3><a href="/salons/new" style="text-decoration: none">+</a></h3>
