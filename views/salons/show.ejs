@@ -1,11 +1,4 @@
 <% layout('layouts/boilerplate') %>
-
-<p></p>
-<p></p>
-<footer>
-  <a href="/salons">All Salons</a>
-</footer>
-
 <div class="row">
   <div class="col-6 offset-3">
     <div class="card">
@@ -16,7 +9,13 @@
           <%= `${salon.salonStreetAddress} ${salon.salonCity},
           ${salon.salonState} ${salon.salonZipCode}` %>
         </p>
-        <a href="#" class="btn btn-primary mb-3">Find On Google Maps</a>
+        <a
+          href="https://www.google.com/maps/place/<%=`${salon.salonStreetAddress}+${salon.salonCity}+${salon.salonState}+${salon.salonZipCode}`%>"
+          class="btn btn-primary mb-3"
+          target="_blank"
+          rel="noopener noreferrer"
+          >Find On Google Maps</a
+        >
         <div>
           <a href="/salons/<%= salon._id %>/edit " class="btn btn-warning mb-3"
             >Edit</a
