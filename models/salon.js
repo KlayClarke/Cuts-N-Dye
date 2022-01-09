@@ -10,6 +10,12 @@ const SalonSchema = new Schema({
   salonCity: String,
   salonState: String,
   salonZipCode: String,
+  salonReviews: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Review",
+    },
+  ],
 });
 
 module.exports = mongoose.model("Salon", SalonSchema);
