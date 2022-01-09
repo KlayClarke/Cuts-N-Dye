@@ -64,13 +64,13 @@
       <button class="btn btn-success">Submit</button>
     </form>
     <div class="mb-3">
-      <% for(let review of salon.salonReviews) {%>
-      <div class="card m-3">
-        <p><strong>Rating:</strong> <%= review.rating %></p>
-        <p><strong>Review:</strong> <%= review.body %></p>
-      </div>
+      <% salon.salonReviews.slice().reverse().forEach(function(item) { %>
 
-      <% } %>
+      <div class="card m-3">
+        <p><strong>Rating:</strong> <%= item.rating %></p>
+        <p><strong>Review:</strong> <%= item.body %></p>
+      </div>
+      <% }) %>
     </div>
   </div>
 </div>
