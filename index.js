@@ -7,6 +7,7 @@ const { salonValidatorSchema } = require("./schemas");
 const catchAsync = require("./utilities/CatchAsync");
 const ExpressError = require("./utilities/ExpressError");
 const Salon = require("./models/salon");
+const Review = require("./models/review");
 
 mongoose.connect("mongodb://localhost:27017/cuts-n-dye");
 
@@ -72,6 +73,18 @@ app.post(
   validateSalon,
   catchAsync(async (req, res, next) => {
     const salon = new Salon(req.body.salon);
+    await salon.save();
+    res.redirect(`/salons/${salon._id}`);
+  })
+);
+
+app.post(
+  "/salons/:id/reviews",
+  catchAsync(async (req, res) => {
+    const salon = await Salon.findById(req.params.id);
+    const review = new Review(req.body.review);
+    salon.salonReviews.push(review);
+    await review.save();
     await salon.save();
     res.redirect(`/salons/${salon._id}`);
   })
