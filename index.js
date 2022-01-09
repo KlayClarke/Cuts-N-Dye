@@ -3,7 +3,7 @@ const path = require("path");
 const mongoose = require("mongoose");
 const ejsMate = require("ejs-mate");
 const methodOverride = require("method-override");
-const { salonValidatorSchema } = require("./schemas");
+const { salonValidatorSchema, reviewValidatorSchema } = require("./schemas");
 const catchAsync = require("./utilities/CatchAsync");
 const ExpressError = require("./utilities/ExpressError");
 const Salon = require("./models/salon");
@@ -28,6 +28,16 @@ app.use(methodOverride("_method"));
 
 const validateSalon = (req, res, next) => {
   const { error } = salonValidatorSchema.validate(req.body);
+  if (error) {
+    const msg = error.details.map((el) => el.message).join(",");
+    throw new ExpressError(msg, 400);
+  } else {
+    next();
+  }
+};
+
+const validateReview = (req, res, next) => {
+  const { error } = reviewValidatorSchema.validate(req.body);
   if (error) {
     const msg = error.details.map((el) => el.message).join(",");
     throw new ExpressError(msg, 400);
@@ -80,6 +90,7 @@ app.post(
 
 app.post(
   "/salons/:id/reviews",
+  validateReview,
   catchAsync(async (req, res) => {
     const salon = await Salon.findById(req.params.id);
     const review = new Review(req.body.review);
