@@ -14,3 +14,12 @@ module.exports.salonValidatorSchema = joi.object({
     })
     .required(),
 });
+
+module.exports.reviewValidatorSchema = joi.object({
+  review: joi
+    .object({
+      rating: joi.number().required().min(1).max(5),
+      body: joi.string().required(),
+    })
+    .required(),
+});
