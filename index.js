@@ -65,7 +65,8 @@ app.get("/salons/new", (req, res) => {
 app.get(
   "/salons/:id",
   catchAsync(async (req, res, next) => {
-    const salon = await Salon.findById(req.params.id);
+    const salon = await Salon.findById(req.params.id).populate("salonReviews");
+    console.log(salon);
     res.render("salons/show", { salon });
   })
 );
