@@ -122,6 +122,16 @@ app.delete(
   })
 );
 
+app.delete(
+  "/salons/:id/reviews/:reviewId",
+  catchAsync(async (req, res, next) => {
+    const { id, reviewId } = req.params;
+    Salon.findByIdAndUpdate(id, { $pull: { salonReviews: reviewId } });
+    const review = await Review.findByIdAndDelete(reviewId);
+    res.redirect(`/salons/${id}`);
+  })
+);
+
 app.all("*", (req, res, next) => {
   next(new ExpressError("Page Not Found", 404));
 });
