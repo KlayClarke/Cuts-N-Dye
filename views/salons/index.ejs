@@ -1,4 +1,11 @@
-<% layout('layouts/boilerplate') %> <% for(let salon of salons) { %>
+<% layout('layouts/boilerplate') %>
+<h3 class="mb-3">
+  <a href="/salons/new" style="text-decoration: none; color: rgb(36, 36, 36)"
+    >+</a
+  >
+</h3>
+<% for(let salon of salons) { %>
+
 <div class="card mb-3">
   <div class="row">
     <div class="col-md-3">
@@ -24,8 +31,3 @@
 </div>
 
 <% }%>
-<h3 class="mb-3">
-  <a href="/salons/new" style="text-decoration: none; color: rgb(36, 36, 36)"
-    >+</a
-  >
-</h3>
