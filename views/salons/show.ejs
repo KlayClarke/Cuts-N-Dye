@@ -86,6 +86,12 @@
         <div class="card-body">
           <p><strong>Rating:</strong> <%= item.rating %></p>
           <p><strong>Review:</strong> <%= item.body %></p>
+          <form
+            action="/salons/<%= salon._id %>/reviews/<%= item._id %>?_method=DELETE  "
+            method="POST"
+          >
+            <button class="btn btn-sm btn-danger">x</button>
+          </form>
         </div>
       </div>
       <% }) %>
