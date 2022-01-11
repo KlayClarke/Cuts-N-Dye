@@ -1,9 +1,12 @@
 const express = require("express");
 const salonRoutes = require("./routes/salons");
+const reviewRoutes = require("./routes/reviews");
 const path = require("path");
 const mongoose = require("mongoose");
 const ejsMate = require("ejs-mate");
+const session = require("express-session");
 const methodOverride = require("method-override");
+const cookieParser = require("cookie-parser");
 
 const ExpressError = require("./utilities/ExpressError");
 
@@ -21,15 +24,31 @@ app.engine("ejs", ejsMate);
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
+app.use(cookieParser());
+
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
 app.use(express.static(path.join(__dirname, "public")));
 
+const sessionConfig = {
+  secret: "session-secret",
+  resave: false,
+  saveUninitialized: true,
+  cookie: {
+    httpOnly: true,
+    expires: Date.now() + 604800000, // num of milliseconds in week,
+    maxAge: 604800000,
+  },
+};
+
+app.use(session(sessionConfig));
+
+app.use("/salons", salonRoutes);
+app.use("/salons/:id/reviews", reviewRoutes);
+
 app.get("/", (req, res) => {
   res.render("home");
 });
-
-app.use("/salons", salonRoutes);
 
 app.all("*", (req, res, next) => {
   next(new ExpressError("Page Not Found", 404));
