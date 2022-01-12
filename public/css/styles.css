@@ -1,5 +1,5 @@
 .scrollable {
-  height: 40vh;
+  height: 35vh;
   overflow-x: hidden;
   overflow-y: auto;
 }
