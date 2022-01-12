@@ -25,6 +25,7 @@ router.post(
     salon.salonReviews.push(review);
     await review.save();
     await salon.save();
+    req.flash("success", "Successfully added salon review!");
     res.redirect(`/salons/${salon._id}`);
   })
 );
@@ -37,6 +38,7 @@ router.delete(
       $pull: { salonReviews: reviewId },
     });
     const review = await Review.findByIdAndDelete(reviewId);
+    req.flash("success", "Successfully deleted salon review!");
     res.redirect(`/salons/${id}`);
   })
 );
