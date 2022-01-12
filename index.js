@@ -7,6 +7,7 @@ const ejsMate = require("ejs-mate");
 const session = require("express-session");
 const methodOverride = require("method-override");
 const cookieParser = require("cookie-parser");
+const flash = require("connect-flash");
 
 const ExpressError = require("./utilities/ExpressError");
 
@@ -36,12 +37,19 @@ const sessionConfig = {
   saveUninitialized: true,
   cookie: {
     httpOnly: true,
-    expires: Date.now() + 604800000, // num of milliseconds in week,
+    expires: Date.now() + 604800000, // num of milliseconds in week - cookie expires after week
     maxAge: 604800000,
   },
 };
 
 app.use(session(sessionConfig));
+app.use(flash());
+
+app.use((req, res, next) => {
+  res.locals.success = req.flash("success");
+  res.locals.error = req.flash("error");
+  next();
+});
 
 app.use("/salons", salonRoutes);
 app.use("/salons/:id/reviews", reviewRoutes);
