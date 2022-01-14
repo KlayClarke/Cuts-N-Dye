@@ -3,6 +3,7 @@ const router = express.Router();
 const catchAsync = require("../utilities/CatchAsync");
 const User = require("../models/user");
 const passport = require("passport");
+const { isLoggedIn } = require("../middleware");
 
 router.get("/register", (req, res) => {
   res.render("users/register");
@@ -39,5 +40,11 @@ router.post(
     res.redirect("/salons");
   }
 );
+
+router.get("/logout", isLoggedIn, (req, res) => {
+  req.logout();
+  req.flash("success", "Successfully Logged Out");
+  res.redirect("/salons");
+});
 
 module.exports = router;
