@@ -22,6 +22,55 @@
             ${salon.salonState} ${salon.salonZipCode}` %></small
           >
         </p>
+        <button
+          class="btn btn-light popup"
+          type="button"
+          data-bs-toggle="modal"
+          data-bs-target="#modal-popup<%= salons.indexOf(salon) %> "
+        >
+          Quickinfo
+        </button>
+        <div
+          class="modal fade"
+          id="modal-popup<%= salons.indexOf(salon) %>"
+          tabindex="1"
+          aria-labelledby="modalLabel"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="modalLabel">
+                  <span class="avg-price">$<%= salon.salonAveragePrice %></span>
+                </h5>
+                <button
+                  class="btn-close"
+                  type="button"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div class="modal-body">
+                <h3><%= salon.salonName %></h3>
+                <hr />
+                <h5><%= salon.salonType %></h5>
+                <p>
+                  <%= `${salon.salonStreetAddress} ${salon.salonCity}
+                  ${salon.salonState} ${salon.salonZipCode}` %>
+                </p>
+              </div>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-bs-dismiss="modal"
+                >
+                  Close
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
         <a class="btn btn-light" href=" /salons/<%= salon._id  %>  "
           >View <%= salon.title %>
         </a>
