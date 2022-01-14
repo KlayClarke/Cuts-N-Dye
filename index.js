@@ -58,6 +58,7 @@ passport.serializeUser(User.serializeUser()); //store user in session
 passport.deserializeUser(User.deserializeUser()); //unstore user in session
 
 app.use((req, res, next) => {
+  res.locals.currentUser = req.user;
   res.locals.success = req.flash("success");
   res.locals.error = req.flash("error");
   next();
@@ -78,7 +79,6 @@ app.all("*", (req, res, next) => {
 app.use((err, req, res, next) => {
   const { statusCode = 500, message = "Something went wrong" } = err;
   res.status(statusCode).send(message);
-  res.send("Oh boy, something went wrong");
 });
 
 app.listen(3000, () => {
