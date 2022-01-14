@@ -20,6 +20,7 @@ router.post(
         if (err) return next(err);
         req.flash("success", "Welcome to Cuts-N-Dye");
         const redirectUrl = req.session.returnTo || "/salons";
+        delete req.session.returnTo;
         res.redirect(redirectUrl);
       });
     } catch (e) {
@@ -42,6 +43,7 @@ router.post(
   async (req, res) => {
     req.flash("success", `Welcome back, ${req.body.username}`);
     const redirectUrl = req.session.returnTo || "/salons";
+    delete req.session.returnTo;
     res.redirect(redirectUrl);
   }
 );
