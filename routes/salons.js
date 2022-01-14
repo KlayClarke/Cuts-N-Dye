@@ -5,6 +5,7 @@ const Salon = require("../models/salon");
 const Review = require("../models/review");
 const { salonValidatorSchema } = require("../schemas");
 const ExpressError = require("../utilities/ExpressError");
+const { isLoggedIn } = require("../middleware");
 
 const validateSalon = (req, res, next) => {
   const { error } = salonValidatorSchema.validate(req.body);
@@ -16,7 +17,7 @@ const validateSalon = (req, res, next) => {
   }
 };
 
-router.get("/new", (req, res) => {
+router.get("/new", isLoggedIn, (req, res) => {
   res.render("salons/new");
 });
 
@@ -30,6 +31,7 @@ router.get(
 
 router.post(
   "/",
+  isLoggedIn,
   validateSalon,
   catchAsync(async (req, res, next) => {
     const salon = new Salon(req.body.salon);
@@ -54,6 +56,7 @@ router.get(
 
 router.put(
   "/:id",
+  isLoggedIn,
   validateSalon,
   catchAsync(async (req, res, next) => {
     const { id } = req.params;
@@ -65,6 +68,7 @@ router.put(
 
 router.delete(
   "/:id",
+  isLoggedIn,
   catchAsync(async (req, res, next) => {
     const { id } = req.params;
     await Salon.findByIdAndDelete(id);
@@ -75,6 +79,7 @@ router.delete(
 
 router.get(
   "/:id/edit",
+  isLoggedIn,
   catchAsync(async (req, res, next) => {
     const salon = await Salon.findById(req.params.id);
     if (!salon) {

@@ -5,6 +5,7 @@ const Salon = require("../models/salon");
 const Review = require("../models/review");
 const { reviewValidatorSchema } = require("../schemas");
 const ExpressError = require("../utilities/ExpressError");
+const { isLoggedIn } = require("../middleware");
 
 const validateReview = (req, res, next) => {
   const { error } = reviewValidatorSchema.validate(req.body);
@@ -18,6 +19,7 @@ const validateReview = (req, res, next) => {
 
 router.post(
   "/",
+  isLoggedIn,
   validateReview,
   catchAsync(async (req, res) => {
     const salon = await Salon.findById(req.params.id);
@@ -32,6 +34,7 @@ router.post(
 
 router.delete(
   "/:reviewId",
+  isLoggedIn,
   catchAsync(async (req, res, next) => {
     const { id, reviewId } = req.params;
     const salon = await Salon.findByIdAndUpdate(id, {
