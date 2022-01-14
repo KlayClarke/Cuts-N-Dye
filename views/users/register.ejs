@@ -1,0 +1,39 @@
+<% layout('layouts/boilerplate') %>
+<h1>Create New Account</h1>
+<div class="user-reg">
+  <form action="/register" method="post" class="validated-form" novalidate>
+    <div class="mb-3">
+      <label for="email" class="form-label">Email</label>
+      <input
+        type="email"
+        id="email"
+        name="email"
+        class="form-control"
+        required
+      />
+    </div>
+    <div class="mb-3">
+      <label for="username" class="form-label">Username</label>
+      <input
+        type="text"
+        id="username"
+        name="username"
+        class="form-control"
+        required
+      />
+      <div class="valid-feedback">Great username</div>
+    </div>
+
+    <div class="mb-3">
+      <label for="password" class="form-label">Password</label>
+      <input
+        type="password"
+        class="form-control"
+        id="password"
+        name="password"
+        required
+      />
+    </div>
+    <button type="submit" class="btn btn-warning">Create Account</button>
+  </form>
+</div>
