@@ -1,6 +1,7 @@
 const express = require("express");
 const salonRoutes = require("./routes/salons");
 const reviewRoutes = require("./routes/reviews");
+const userRoutes = require("./routes/users");
 const path = require("path");
 const mongoose = require("mongoose");
 const ejsMate = require("ejs-mate");
@@ -62,6 +63,7 @@ app.use((req, res, next) => {
   next();
 });
 
+app.use("/", userRoutes);
 app.use("/salons", salonRoutes);
 app.use("/salons/:id/reviews", reviewRoutes);
 
