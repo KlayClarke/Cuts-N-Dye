@@ -23,6 +23,7 @@
           <%= `${salon.salonStreetAddress} ${salon.salonCity},
           ${salon.salonState} ${salon.salonZipCode}` %>
         </p>
+        <p class="text-muted">Submitted by <%= salon.salonAuthor.username %></p>
         <a
           href="https://www.google.com/maps/place/<%=`${salon.salonStreetAddress}+${salon.salonCity}+${salon.salonState}+${salon.salonZipCode}`%>"
           class="btn btn-primary mb-3"
