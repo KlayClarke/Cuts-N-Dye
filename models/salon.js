@@ -11,6 +11,10 @@ const SalonSchema = new Schema({
   salonCity: String,
   salonState: String,
   salonZipCode: String,
+  salonAuthor: {
+    type: Schema.Types.ObjectId,
+    ref: "User",
+  },
   salonReviews: [
     {
       type: Schema.Types.ObjectId,
