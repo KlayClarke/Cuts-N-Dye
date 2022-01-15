@@ -17,10 +17,6 @@ const validateSalon = (req, res, next) => {
   }
 };
 
-router.get("/new", isLoggedIn, (req, res) => {
-  res.render("salons/new");
-});
-
 router.get(
   "/",
   catchAsync(async (req, res) => {
@@ -28,6 +24,10 @@ router.get(
     res.render("salons/index", { salons });
   })
 );
+
+router.get("/new", isLoggedIn, (req, res) => {
+  res.render("salons/new");
+});
 
 router.post(
   "/",
