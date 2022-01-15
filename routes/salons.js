@@ -24,7 +24,7 @@ router.get("/new", isLoggedIn, (req, res) => {
 router.get(
   "/",
   catchAsync(async (req, res) => {
-    const salons = await Salon.find({});
+    const salons = await Salon.find({}).populate("salonAuthor");
     res.render("salons/index", { salons });
   })
 );
