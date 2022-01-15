@@ -31,6 +31,7 @@
           rel="noopener noreferrer"
           >Find On Google Maps</a
         >
+        <% if(currentUser && salon.salonAuthor.equals(currentUser._id)) { %>
         <div>
           <a href="/salons/<%= salon._id %>/edit " class="btn btn-warning mb-3"
             >Edit</a
@@ -43,6 +44,7 @@
             <button class="btn btn-danger mb-3">Delete</button>
           </form>
         </div>
+        <% } %>
       </div>
     </div>
   </div>
