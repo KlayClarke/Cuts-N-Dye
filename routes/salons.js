@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router({ mergeParams: true });
 const catchAsync = require("../utilities/CatchAsync");
 const Salon = require("../models/salon");
-const { isLoggedIn, isAuthor } = require("../middleware");
+const { isLoggedIn, isAuthor, validateSalon } = require("../middleware");
 
 router.get(
   "/",
