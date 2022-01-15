@@ -48,7 +48,6 @@ router.get(
     const salon = await Salon.findById(req.params.id)
       .populate("salonReviews")
       .populate("salonAuthor");
-    console.log(salon);
     if (!salon) {
       req.flash("error", "Salon not found");
       res.redirect("/salons");
