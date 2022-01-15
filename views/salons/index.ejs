@@ -55,11 +55,12 @@
                 <hr />
                 <h5><%= salon.salonType %></h5>
                 <p>
-                  <%= `${salon.salonStreetAddress} ${salon.salonCity}
+                  <%= `${salon.salonStreetAddress} ${salon.salonCity},
                   ${salon.salonState} ${salon.salonZipCode}` %>
                 </p>
               </div>
               <div class="modal-footer">
+                <p>Submitted by <%= salon.salonAuthor.username %></p>
                 <button
                   type="button"
                   class="btn btn-secondary"
