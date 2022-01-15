@@ -43,7 +43,10 @@ router.post(
   async (req, res) => {
     req.flash("success", `Welcome back, ${req.body.username}`);
     const returnTo = req.session.returnTo;
-    if (returnTo.slice(returnTo.length - 7) === "reviews") {
+    if (
+      req.session.returnTo &&
+      returnTo.slice(returnTo.length - 7) === "reviews"
+    ) {
       // fix bug that attempts to bring user to route for individual review (we have no such routes) after login following review attempt
       // bring user to salon show page where user attempted to create review prior to login
       req.session.returnTo = returnTo.slice(0, -7);
