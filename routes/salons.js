@@ -35,6 +35,7 @@ router.post(
   validateSalon,
   catchAsync(async (req, res, next) => {
     const salon = new Salon(req.body.salon);
+    salon.salonAuthor = req.user._id;
     await salon.save();
     req.flash("success", "Successfully added new salon!");
     res.redirect(`/salons/${salon._id}`);
@@ -44,7 +45,10 @@ router.post(
 router.get(
   "/:id",
   catchAsync(async (req, res, next) => {
-    const salon = await Salon.findById(req.params.id).populate("salonReviews");
+    const salon = await Salon.findById(req.params.id)
+      .populate("salonReviews")
+      .populate("salonAuthor");
+    console.log(salon);
     if (!salon) {
       req.flash("error", "Salon not found");
       res.redirect("/salons");
