@@ -1,3 +1,5 @@
+const Salon = require("./models/salon");
+
 module.exports.isLoggedIn = (req, res, next) => {
   if (!req.isAuthenticated()) {
     req.session.returnTo = req.originalUrl;
