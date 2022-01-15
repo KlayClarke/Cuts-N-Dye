@@ -2,20 +2,7 @@ const express = require("express");
 const router = express.Router({ mergeParams: true });
 const catchAsync = require("../utilities/CatchAsync");
 const Salon = require("../models/salon");
-const Review = require("../models/review");
-const { salonValidatorSchema } = require("../schemas");
-const ExpressError = require("../utilities/ExpressError");
 const { isLoggedIn, isAuthor } = require("../middleware");
-
-const validateSalon = (req, res, next) => {
-  const { error } = salonValidatorSchema.validate(req.body);
-  if (error) {
-    const msg = error.details.map((el) => el.message).join(",");
-    throw new ExpressError(msg, 400);
-  } else {
-    next();
-  }
-};
 
 router.get(
   "/",
