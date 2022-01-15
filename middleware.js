@@ -1,6 +1,6 @@
 const Salon = require("./models/salon");
-const ExpressError = require("../utilities/ExpressError");
-const { salonValidatorSchema } = require("../schemas");
+const ExpressError = require("./utilities/ExpressError");
+const { salonValidatorSchema, reviewValidatorSchema } = require("./schemas");
 
 module.exports.isLoggedIn = (req, res, next) => {
   if (!req.isAuthenticated()) {
