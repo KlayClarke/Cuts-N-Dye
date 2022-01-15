@@ -8,7 +8,7 @@ router.get(
   "/",
   catchAsync(async (req, res) => {
     const salons = await Salon.find({}).populate("salonAuthor");
-    res.render("salons/index", { salons });
+    res.render("salons/", { salons });
   })
 );
 
@@ -37,7 +37,7 @@ router.get(
       .populate("salonAuthor");
     if (!salon) {
       req.flash("error", "Salon not found");
-      res.redirect("/salons/index");
+      res.redirect("/salons");
     } else {
       res.render("salons/show", { salon });
     }
@@ -53,7 +53,7 @@ router.get(
     const salon = await Salon.findById(id);
     if (!salon) {
       req.flash("error", "Salon not found");
-      return res.redirect("/salons/index");
+      return res.redirect("/salons");
     }
     res.render("salons/edit", { salon });
   })
@@ -84,11 +84,11 @@ router.delete(
     const salon = await Salon.findById(id);
     if (!salon) {
       req.flash("error", "Salon not found");
-      return res.redirect("/salons/index");
+      return res.redirect("/salons");
     }
     await Salon.findByIdAndDelete(id);
     req.flash("success", "Successfully delete salon!");
-    res.redirect("/salons/index");
+    res.redirect("/salons");
   })
 );
 
