@@ -48,7 +48,9 @@
       </div>
     </div>
   </div>
+
   <div class="col-6">
+    <% if(currentUser) { %>
     <form
       class="mt-3 validated-form"
       action="/salons/<%= salon._id  %>/reviews "
@@ -83,7 +85,8 @@
       <button class="btn btn-success">Submit</button>
     </form>
     <hr />
-    <div class="mt-3 scrollable">
+    <% } %>
+    <div class="mt-3 scrollable <% if(!currentUser) { %> full-length <% } %>">
       <% salon.salonReviews.slice().reverse().forEach(function(item) { %>
       <div class="card m-3">
         <div class="card-body">
