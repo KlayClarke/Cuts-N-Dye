@@ -1,4 +1,5 @@
 const Salon = require("./models/salon");
+const Review = require("./models/review");
 const ExpressError = require("./utilities/ExpressError");
 const { salonValidatorSchema, reviewValidatorSchema } = require("./schemas");
 
@@ -24,11 +25,24 @@ module.exports.isLoggedIn = (req, res, next) => {
   next();
 };
 
-module.exports.isAuthor = async (req, res, next) => {
+module.exports.isSalonAuthor = async (req, res, next) => {
   const { id } = req.params;
   const salon = await Salon.findById(id);
   if (!salon.salonAuthor.equals(req.user._id)) {
     req.flash("error", "You do not have permission to access this route.");
+    return res.redirect("/salons");
+  }
+  next();
+};
+
+module.exports.isReviewAuthor = async (req, res, next) => {
+  const { reviewId } = req.params;
+  const review = await Review.findById(reviewId);
+  if (!review.author._id.equals(req.user._id)) {
+    console
+      .log("attempting but failing to delete review that is not mine")
+      .toUpperCase();
+    req.flash("error", "You do not have permission to delete this review");
     return res.redirect("/salons");
   }
   next();
