@@ -4,7 +4,7 @@ const catchAsync = require("../utilities/CatchAsync");
 const Salon = require("../models/salon");
 const {
   isLoggedIn,
-  isAuthor,
+  isSalonAuthor,
   validateSalon,
   logUrl,
 } = require("../middleware");
@@ -37,17 +37,17 @@ router.post(
 
 router.get(
   "/:id",
+  logUrl,
   catchAsync(async (req, res, next) => {
     const salon = await Salon.findById(req.params.id)
       .populate({
-        // nested populate to populate author of salonReviews that are populated from salon model
+        // nested populate to populate author of reviews that are populated from salon model
         path: "salonReviews",
         populate: {
           path: "author",
         },
       })
       .populate("salonAuthor");
-    console.log(salon);
     if (!salon) {
       req.flash("error", "Salon not found");
       res.redirect("/salons");
@@ -61,7 +61,7 @@ router.get(
   "/:id/edit",
   logUrl,
   isLoggedIn,
-  isAuthor,
+  isSalonAuthor,
   catchAsync(async (req, res, next) => {
     const { id } = req.params;
     const salon = await Salon.findById(id);
@@ -77,7 +77,7 @@ router.put(
   "/:id",
   logUrl,
   isLoggedIn,
-  isAuthor,
+  isSalonAuthor,
   validateSalon,
   catchAsync(async (req, res, next) => {
     const { id } = req.params;
@@ -94,7 +94,7 @@ router.delete(
   "/:id",
   logUrl,
   isLoggedIn,
-  isAuthor,
+  isSalonAuthor,
   catchAsync(async (req, res, next) => {
     const { id } = req.params;
     const salon = await Salon.findById(id);
