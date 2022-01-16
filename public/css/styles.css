@@ -1,7 +1,11 @@
 .scrollable {
-  height: 40vh;
+  height: 52vh;
   overflow-x: hidden;
   overflow-y: auto;
+}
+
+.full-length {
+  height: 80vh;
 }
 
 .avg-price {
