@@ -32,6 +32,7 @@ router.post(
 router.get(
   "/:id",
   catchAsync(async (req, res, next) => {
+    req.session.returnTo = req.originalUrl;
     const salon = await Salon.findById(req.params.id)
       .populate("salonReviews")
       .populate("salonAuthor");
