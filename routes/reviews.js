@@ -3,7 +3,7 @@ const router = express.Router({ mergeParams: true });
 const catchAsync = require("../utilities/CatchAsync");
 const Salon = require("../models/salon");
 const Review = require("../models/review");
-const { isLoggedIn, isAuthor, validateReview } = require("../middleware");
+const { isLoggedIn, validateReview, isReviewAuthor } = require("../middleware");
 
 router.post(
   "/",
@@ -24,6 +24,7 @@ router.post(
 router.delete(
   "/:reviewId",
   isLoggedIn,
+  isReviewAuthor,
   catchAsync(async (req, res, next) => {
     const { id, reviewId } = req.params;
     const salon = await Salon.findByIdAndUpdate(id, {
