@@ -39,8 +39,15 @@ router.get(
   "/:id",
   catchAsync(async (req, res, next) => {
     const salon = await Salon.findById(req.params.id)
-      .populate("salonReviews")
+      .populate({
+        // nested populate to populate author of salonReviews that are populated from salon model
+        path: "salonReviews",
+        populate: {
+          path: "author",
+        },
+      })
       .populate("salonAuthor");
+    console.log(salon);
     if (!salon) {
       req.flash("error", "Salon not found");
       res.redirect("/salons");
