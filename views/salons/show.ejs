@@ -90,6 +90,7 @@
       <% salon.salonReviews.slice().reverse().forEach(function(item) { %>
       <div class="card m-3">
         <div class="card-body">
+          <p class="text-muted">@<%= item.author.username %></p>
           <p><strong>Rating:</strong> <%= item.rating %></p>
           <p><strong>Review:</strong> <%= item.body %></p>
           <form
