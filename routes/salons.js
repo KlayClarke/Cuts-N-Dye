@@ -2,7 +2,12 @@ const express = require("express");
 const router = express.Router({ mergeParams: true });
 const catchAsync = require("../utilities/CatchAsync");
 const Salon = require("../models/salon");
-const { isLoggedIn, isAuthor, validateSalon } = require("../middleware");
+const {
+  isLoggedIn,
+  isAuthor,
+  validateSalon,
+  logUrl,
+} = require("../middleware");
 
 router.get(
   "/",
@@ -12,12 +17,13 @@ router.get(
   })
 );
 
-router.get("/new", isLoggedIn, (req, res) => {
+router.get("/new", logUrl, isLoggedIn, (req, res) => {
   res.render("salons/new");
 });
 
 router.post(
   "/",
+  logUrl,
   isLoggedIn,
   validateSalon,
   catchAsync(async (req, res, next) => {
@@ -32,7 +38,6 @@ router.post(
 router.get(
   "/:id",
   catchAsync(async (req, res, next) => {
-    req.session.returnTo = req.originalUrl;
     const salon = await Salon.findById(req.params.id)
       .populate("salonReviews")
       .populate("salonAuthor");
@@ -47,6 +52,7 @@ router.get(
 
 router.get(
   "/:id/edit",
+  logUrl,
   isLoggedIn,
   isAuthor,
   catchAsync(async (req, res, next) => {
@@ -62,6 +68,7 @@ router.get(
 
 router.put(
   "/:id",
+  logUrl,
   isLoggedIn,
   isAuthor,
   validateSalon,
@@ -78,6 +85,7 @@ router.put(
 
 router.delete(
   "/:id",
+  logUrl,
   isLoggedIn,
   isAuthor,
   catchAsync(async (req, res, next) => {
