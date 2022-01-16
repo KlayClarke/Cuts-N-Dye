@@ -2,11 +2,24 @@ const Salon = require("./models/salon");
 const ExpressError = require("./utilities/ExpressError");
 const { salonValidatorSchema, reviewValidatorSchema } = require("./schemas");
 
+module.exports.logUrl = (req, res, next) => {
+  req.session.returnTo = req.originalUrl;
+  next();
+};
+
 module.exports.isLoggedIn = (req, res, next) => {
   if (!req.isAuthenticated()) {
-    req.session.returnTo = req.originalUrl;
+    const redirectUrl = req.session.returnTo;
+    if (
+      req.session.returnTo &&
+      redirectUrl.slice(redirectUrl.length - 4) === "edit"
+    ) {
+      const newRedirectUrl = redirectUrl.slice(0, -4);
+      req.flash("error", "Must Be Signed In");
+      return res.redirect(newRedirectUrl);
+    }
     req.flash("error", "Must Be Signed In");
-    return res.redirect("back");
+    return res.redirect(redirectUrl);
   }
   next();
 };
