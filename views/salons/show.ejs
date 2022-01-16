@@ -93,12 +93,14 @@
           <p class="text-muted">@<%= item.author.username %></p>
           <p><strong>Rating:</strong> <%= item.rating %></p>
           <p><strong>Review:</strong> <%= item.body %></p>
+          <% if(currentUser && item.author._id.equals(currentUser._id)) { %>
           <form
             action="/salons/<%= salon._id %>/reviews/<%= item._id %>?_method=DELETE  "
             method="POST"
           >
-            <button class="btn btn-sm btn-danger">x</button>
+            <button class="btn btn-sm btn-danger">Delete</button>
           </form>
+          <% } %>
         </div>
       </div>
       <% }) %>
