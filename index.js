@@ -1,3 +1,7 @@
+if (process.env.NODE_ENV !== "production") {
+  require("dotenv").config();
+}
+
 const express = require("express");
 const salonRoutes = require("./routes/salons");
 const reviewRoutes = require("./routes/reviews");
