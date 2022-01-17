@@ -36,14 +36,11 @@ module.exports.isSalonAuthor = async (req, res, next) => {
 };
 
 module.exports.isReviewAuthor = async (req, res, next) => {
-  const { reviewId } = req.params;
+  const { id, reviewId } = req.params;
   const review = await Review.findById(reviewId);
   if (!review.author._id.equals(req.user._id)) {
-    console
-      .log("attempting but failing to delete review that is not mine")
-      .toUpperCase();
     req.flash("error", "You do not have permission to delete this review");
-    return res.redirect("/salons");
+    return res.redirect(`/salons/${id}`);
   }
   next();
 };
