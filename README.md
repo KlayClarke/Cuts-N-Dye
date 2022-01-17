@@ -1,2 +1,2 @@
 # fresher
-A web-app to assist those searching for the best salons and barbershops nearby. Whether one is planning a vacation, or looking to change their style, Fresher points members toward the 'freshest' of haircuts in every major city.
+At Fresher, we assist those looking to take their style to the next level. We are able to match members with the best and most affordable haircuts in every major city. On your next vacation, remember that there are plenty of places nearby to freshen up, and Fresher will guide you toward the best salons and barbershops for you.
