@@ -5,20 +5,21 @@ const users = require("../controllers/users");
 const passport = require("passport");
 const { isLoggedIn } = require("../middleware");
 
-router.get("/register", users.userRegistrationForm);
+router
+  .route("/register")
+  .get(users.userRegistrationForm)
+  .post(catchAsync(users.registerUser));
 
-router.post("/register", catchAsync(users.registerUser));
-
-router.get("/login", users.userLoginForm);
-
-router.post(
-  "/login",
-  passport.authenticate("local", {
-    failureFlash: true,
-    failureRedirect: "/login",
-  }),
-  users.loginUser
-);
+router
+  .route("/login")
+  .get(users.userLoginForm)
+  .post(
+    passport.authenticate("local", {
+      failureFlash: true,
+      failureRedirect: "/login",
+    }),
+    users.loginUser
+  );
 
 router.get("/logout", isLoggedIn, users.logoutUser);
 

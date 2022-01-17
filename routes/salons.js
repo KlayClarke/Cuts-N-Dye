@@ -9,19 +9,24 @@ const {
   logUrl,
 } = require("../middleware");
 
-router.get("/", logUrl, catchAsync(salons.index));
+router
+  .route("/")
+  .get(logUrl, catchAsync(salons.index))
+  .post(logUrl, isLoggedIn, validateSalon, catchAsync(salons.createNewSalon));
 
 router.get("/new", isLoggedIn, salons.salonCreationForm);
 
-router.post(
-  "/",
-  logUrl,
-  isLoggedIn,
-  validateSalon,
-  catchAsync(salons.createNewSalon)
-);
-
-router.get("/:id", logUrl, catchAsync(salons.getSalon));
+router
+  .route("/:id")
+  .get(logUrl, catchAsync(salons.getSalon))
+  .put(
+    logUrl,
+    isLoggedIn,
+    isSalonAuthor,
+    validateSalon,
+    catchAsync(salons.editSalon)
+  )
+  .delete(logUrl, isLoggedIn, isSalonAuthor, catchAsync(salons.deleteSalon));
 
 router.get(
   "/:id/edit",
@@ -29,23 +34,6 @@ router.get(
   isLoggedIn,
   isSalonAuthor,
   catchAsync(salons.salonEditForm)
-);
-
-router.put(
-  "/:id",
-  logUrl,
-  isLoggedIn,
-  isSalonAuthor,
-  validateSalon,
-  catchAsync(salons.editSalon)
-);
-
-router.delete(
-  "/:id",
-  logUrl,
-  isLoggedIn,
-  isSalonAuthor,
-  catchAsync(salons.deleteSalon)
 );
 
 module.exports = router;
