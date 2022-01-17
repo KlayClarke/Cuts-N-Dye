@@ -3,7 +3,13 @@
 <div class="row">
   <h1 class="text-center">Add Salon</h1>
   <div class="col-6 offset-3">
-    <form action="/salons" method="post" novalidate class="validated-form">
+    <form
+      action="/salons"
+      method="post"
+      novalidate
+      class="validated-form"
+      enctype="multipart/form-data"
+    >
       <div class="mb-3">
         <label class="form-label" for="name">Name</label>
         <input
@@ -40,7 +46,17 @@
         />
       </div>
       <div class="mb-3">
-        <label for="image-url" class="form-label">Image Url (Optional)</label>
+        <label for="salon-image" class="form-label">Image Url (Optional)</label>
+
+        <input
+          type="file"
+          name="image"
+          id="salon-image"
+          class="form-control"
+          multiple
+        />
+      </div>
+      <!-- <div class="mb-3">
         <input
           type="text"
           class="form-control"
@@ -48,7 +64,7 @@
           name="salon[salonImage]"
           placeholder="https://www.image.com"
         />
-      </div>
+      </div> -->
       <div class="mb-3">
         <label for="street-address" class="form-label">Street Address</label>
         <input
