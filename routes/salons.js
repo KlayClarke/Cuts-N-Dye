@@ -1,111 +1,51 @@
 const express = require("express");
 const router = express.Router({ mergeParams: true });
 const catchAsync = require("../utilities/CatchAsync");
-const Salon = require("../models/salon");
+const salons = require("../controllers/salons");
 const {
   isLoggedIn,
-  isAuthor,
+  isSalonAuthor,
   validateSalon,
   logUrl,
 } = require("../middleware");
 
-router.get(
-  "/",
-  catchAsync(async (req, res) => {
-    const salons = await Salon.find({}).populate("salonAuthor");
-    res.render("salons/", { salons });
-  })
-);
+router.get("/", logUrl, catchAsync(salons.index));
 
-router.get("/new", logUrl, isLoggedIn, (req, res) => {
-  res.render("salons/new");
-});
+router.get("/new", isLoggedIn, salons.salonCreationForm);
 
 router.post(
   "/",
   logUrl,
   isLoggedIn,
   validateSalon,
-  catchAsync(async (req, res, next) => {
-    const salon = new Salon(req.body.salon);
-    salon.salonAuthor = req.user._id;
-    await salon.save();
-    req.flash("success", "Successfully added new salon!");
-    res.redirect(`/salons/${salon._id}`);
-  })
+  catchAsync(salons.createNewSalon)
 );
 
-router.get(
-  "/:id",
-  catchAsync(async (req, res, next) => {
-    const salon = await Salon.findById(req.params.id)
-      .populate({
-        // nested populate to populate author of salonReviews that are populated from salon model
-        path: "salonReviews",
-        populate: {
-          path: "author",
-        },
-      })
-      .populate("salonAuthor");
-    console.log(salon);
-    if (!salon) {
-      req.flash("error", "Salon not found");
-      res.redirect("/salons");
-    } else {
-      res.render("salons/show", { salon });
-    }
-  })
-);
+router.get("/:id", logUrl, catchAsync(salons.getSalon));
 
 router.get(
   "/:id/edit",
   logUrl,
   isLoggedIn,
-  isAuthor,
-  catchAsync(async (req, res, next) => {
-    const { id } = req.params;
-    const salon = await Salon.findById(id);
-    if (!salon) {
-      req.flash("error", "Salon not found");
-      return res.redirect("/salons");
-    }
-    res.render("salons/edit", { salon });
-  })
+  isSalonAuthor,
+  catchAsync(salons.salonEditForm)
 );
 
 router.put(
   "/:id",
   logUrl,
   isLoggedIn,
-  isAuthor,
+  isSalonAuthor,
   validateSalon,
-  catchAsync(async (req, res, next) => {
-    const { id } = req.params;
-    const salon = await Salon.findById(id);
-    const salonToUpdate = await Salon.findByIdAndUpdate(id, {
-      ...req.body.salon,
-    });
-    req.flash("success", "Successfully edited salon info!");
-    res.redirect(`/salons/${salonToUpdate._id}`);
-  })
+  catchAsync(salons.editSalon)
 );
 
 router.delete(
   "/:id",
   logUrl,
   isLoggedIn,
-  isAuthor,
-  catchAsync(async (req, res, next) => {
-    const { id } = req.params;
-    const salon = await Salon.findById(id);
-    if (!salon) {
-      req.flash("error", "Salon not found");
-      return res.redirect("/salons");
-    }
-    await Salon.findByIdAndDelete(id);
-    req.flash("success", "Successfully delete salon!");
-    res.redirect("/salons");
-  })
+  isSalonAuthor,
+  catchAsync(salons.deleteSalon)
 );
 
 module.exports = router;
