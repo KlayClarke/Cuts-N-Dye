@@ -13,6 +13,9 @@ map.addControl(new mapboxgl.FullscreenControl());
 
 const marker1 = new mapboxgl.Marker()
   .setLngLat(salon.salonLocation.coordinates)
+  .setPopup(
+    new mapboxgl.Popup({ offset: 25 }).setHTML(`<h5>${salon.salonName}</h5>`)
+  )
   .addTo(map);
 
 // parameters to ensure the model is georeferenced correctly on the map
