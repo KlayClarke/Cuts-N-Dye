@@ -6,10 +6,16 @@
 </h3>
 <% for(let salon of salons) { %>
 
-<div class="card mb-3 shadow">
+<div class="card mb-3 shadow smooth">
   <div class="row">
-    <div class="col-md-3">
-      <img src="<%= salon.salonImage %> " alt="" class="img-fluid" />
+    <div class="col-md-3 index-img-div">
+      <% if(salon.salonImage) { %>
+      <img
+        src="<%= salon.salonImage %> "
+        alt=""
+        class="img-fluid index-img-size"
+      />
+      <% } %>
     </div>
     <div class="col-md-3">
       <div class="card-body">
@@ -23,7 +29,7 @@
           >
         </p>
         <button
-          class="btn btn-light popup"
+          class="btn btn-outline-secondary popup"
           type="button"
           data-bs-toggle="modal"
           data-bs-target="#modal-popup<%= salons.indexOf(salon) %> "
@@ -65,7 +71,7 @@
                 </p>
                 <button
                   type="button"
-                  class="btn btn-secondary"
+                  class="btn btn-outline-secondary"
                   data-bs-dismiss="modal"
                 >
                   Close
@@ -74,7 +80,7 @@
             </div>
           </div>
         </div>
-        <a class="btn btn-light" href=" /salons/<%= salon._id  %>  "
+        <a class="btn btn-outline-secondary" href=" /salons/<%= salon._id  %>  "
           >View <%= salon.title %>
         </a>
       </div>
