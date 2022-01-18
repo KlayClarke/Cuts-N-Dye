@@ -1,19 +1,22 @@
 mapboxgl.accessToken = mapboxToken; // mapboxToken initialized on html file as ejs
+
 const map = new mapboxgl.Map({
   container: "map",
   style: "mapbox://styles/mapbox/light-v10",
-  zoom: 6.5,
-  center: [-74.5, 40],
+  zoom: 12,
+  center: salon.salonLocation.coordinates,
   pitch: 60,
   antialias: true, // create the gl context with MSAA antialiasing, so custom layers are antialiased
 });
 
 map.addControl(new mapboxgl.FullscreenControl());
 
-const marker1 = new mapboxgl.Marker().setLngLat([-74.5, 40]).addTo(map);
+const marker1 = new mapboxgl.Marker()
+  .setLngLat(salon.salonLocation.coordinates)
+  .addTo(map);
 
 // parameters to ensure the model is georeferenced correctly on the map
-const modelOrigin = [-74.5, 40];
+const modelOrigin = salon.salonLocation.coordinates;
 const modelAltitude = 0;
 const modelRotate = [Math.PI / 2, 0, 0];
 
