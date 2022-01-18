@@ -19,3 +19,18 @@
 .shadow {
   box-shadow: 0 7px 30px -10px;
 }
+
+.smooth {
+  border-radius: 10% 25%;
+}
+
+.index-img-div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.index-img-size {
+  height: 100px;
+  width: 100px;
+}
