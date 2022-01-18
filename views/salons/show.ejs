@@ -10,11 +10,9 @@
     <div class="card shadow">
       <div class="text-center">
         <img
-          class="salon-image"
+          class="salon-image smooth show-img-size"
           src=" <%= salon.salonImage %>  "
           alt="salon image"
-          height="400"
-          width="400"
         />
       </div>
     </div>
@@ -117,17 +115,24 @@
       </div>
 
       <div class="mb-3">
-        <textarea
+        <textarea <% if(!currentUser) { %>
+ disabled <% } %> 
+ 
+
           class="form-control shadow"
           name="review[body]"
           id="body"
           cols="30"
           rows="3"
           required
-        ></textarea>
+        ></textarea
+        >
         <label for="" class="invalid-feedback">Text required</label>
       </div>
-      <button class="btn btn-outline-success">Submit</button>
+
+      <button class="btn btn-outline-success" <% if(!currentUser) { %>
+        disabled<% } %>>Submit
+      </button>
     </form>
     <hr />
     <div class="mt-3 scrollable <% if(!currentUser) { %> full-length <% } %>">
