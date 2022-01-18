@@ -29,13 +29,6 @@
           ${salon.salonState} ${salon.salonZipCode}` %>
         </p>
         <p class="text-muted">Submitted by <%= salon.salonAuthor.username %></p>
-        <a
-          href="https://www.google.com/maps/place/<%=`${salon.salonStreetAddress}+${salon.salonCity}+${salon.salonState}+${salon.salonZipCode}`%>"
-          class="btn btn-primary mb-3"
-          target="_blank"
-          rel="noopener noreferrer"
-          >Find On Google Maps</a
-        >
         <% if(currentUser && salon.salonAuthor.equals(currentUser._id)) { %>
         <div>
           <a href="/salons/<%= salon._id %>/edit " class="btn btn-warning mb-3"
