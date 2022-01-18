@@ -5,8 +5,7 @@
   >
 </h3>
 <% for(let salon of salons) { %>
-
-<div class="card mb-3 shadow smooth">
+<div class="card mb-3 salon-index smooth">
   <div class="row">
     <div class="col-md-3 index-img-div">
       <% if(salon.salonImage) { %>
@@ -28,60 +27,8 @@
             ${salon.salonState} ${salon.salonZipCode}` %></small
           >
         </p>
-        <button
-          class="btn btn-outline-secondary popup"
-          type="button"
-          data-bs-toggle="modal"
-          data-bs-target="#modal-popup<%= salons.indexOf(salon) %> "
-        >
-          Quickinfo
-        </button>
-        <div
-          class="modal fade"
-          id="modal-popup<%= salons.indexOf(salon) %>"
-          tabindex="1"
-          aria-labelledby="modalLabel"
-          aria-hidden="true"
-        >
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="modalLabel">
-                  <span class="avg-price">$<%= salon.salonAveragePrice %></span>
-                </h5>
-                <button
-                  class="btn-close"
-                  type="button"
-                  data-bs-dismiss="modal"
-                  aria-label="Close"
-                ></button>
-              </div>
-              <div class="modal-body">
-                <h3><%= salon.salonName %></h3>
-                <hr />
-                <h5><%= salon.salonType %></h5>
-                <p>
-                  <%= `${salon.salonStreetAddress} ${salon.salonCity},
-                  ${salon.salonState} ${salon.salonZipCode}` %>
-                </p>
-              </div>
-              <div class="modal-footer">
-                <p class="text-muted">
-                  Submitted by <%= salon.salonAuthor.username %>
-                </p>
-                <button
-                  type="button"
-                  class="btn btn-outline-secondary"
-                  data-bs-dismiss="modal"
-                >
-                  Close
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-        <a class="btn btn-outline-secondary" href=" /salons/<%= salon._id  %>  "
-          >View <%= salon.title %>
+        <a class="stretched-link" href=" /salons/<%= salon._id  %>  "
+          ><%= salon.title %>
         </a>
       </div>
     </div>
