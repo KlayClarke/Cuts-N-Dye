@@ -7,7 +7,7 @@
 <div class="row">
   <div class="col-6">
     <% if(salon.salonImage) { %>
-    <div class="card shadow">
+    <div class="card default-shadow">
       <div class="text-center">
         <img
           class="salon-image smooth show-img-size"
@@ -19,7 +19,7 @@
 
     <% } %>
 
-    <div class="card mt-3 shadow">
+    <div class="card mt-3 default-shadow">
       <div class="card-header">
         <%= salon.salonType %> <br />
         <span class="avg-price">$<%= salon.salonAveragePrice %></span>
@@ -30,9 +30,7 @@
           <%= `${salon.salonStreetAddress} ${salon.salonCity},
           ${salon.salonState} ${salon.salonZipCode}` %>
         </p>
-        <p class="text-muted">
-          <strong>Submitted by <%= salon.salonAuthor.username %></strong>
-        </p>
+        <p class="text-muted">Submitted by <%= salon.salonAuthor.username %></p>
         <% if(currentUser && salon.salonAuthor.equals(currentUser._id)) { %>
         <div>
           <a
@@ -56,7 +54,7 @@
   <div class="col-6">
     <% if(salon.salonLocation.coordinates.length) { %>
     <div
-      class="card mb-3 shadow"
+      class="card default-shadow"
       id="map"
       style="width: 635px; height: 300px"
     ></div>
@@ -67,7 +65,7 @@
       method="POST"
       novalidate
     >
-      <div class="mb-3">
+      <div class="">
         <fieldset class="starability-basic">
           <input
             type="radio"
@@ -119,7 +117,7 @@
  disabled <% } %> 
  
 
-          class="form-control shadow"
+          class="form-control default-shadow"
           name="review[body]"
           id="body"
           cols="30"
@@ -137,7 +135,7 @@
     <hr />
     <div class="mt-3 scrollable <% if(!currentUser) { %> full-length <% } %>">
       <% salon.salonReviews.slice().reverse().forEach(function(item) { %>
-      <div class="card m-3 shadow">
+      <div class="card m-3 default-shadow">
         <div class="card-body">
           <h6 class="card-title text-muted"><%= item.author.username %></h6>
           <p class="starability-result" data-rating="<%= item.rating %>">
@@ -149,7 +147,7 @@
             action="/salons/<%= salon._id %>/reviews/<%= item._id %>?_method=DELETE  "
             method="POST"
           >
-            <button class="btn btn-sm btn-danger">Delete</button>
+            <button class="btn btn-sm btn-outline-danger">Delete</button>
           </form>
           <% } %>
         </div>
