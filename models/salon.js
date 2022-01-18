@@ -11,6 +11,17 @@ const SalonSchema = new Schema({
   salonCity: String,
   salonState: String,
   salonZipCode: String,
+  salonLocation: {
+    type: {
+      type: String,
+      enum: ["Point"],
+      required: true,
+    },
+    coordinates: {
+      type: [Number],
+      required: true,
+    },
+  },
   salonAuthor: {
     type: Schema.Types.ObjectId,
     ref: "User",
