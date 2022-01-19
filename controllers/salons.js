@@ -13,7 +13,7 @@ module.exports.salonCreationForm = (req, res) => {
 module.exports.createNewSalon = async (req, res, next) => {
   const salon = new Salon(req.body.salon);
   const location = await findLocation(req, salon);
-  salon.salonLocation = location;
+  salon.geometry = location;
   salon.salonAuthor = req.user._id;
   await salon.save();
   req.flash("success", "Successfully added new salon!");

@@ -11,7 +11,7 @@ const SalonSchema = new Schema({
   salonCity: String,
   salonState: String,
   salonZipCode: String,
-  salonLocation: {
+  geometry: {
     type: {
       type: String,
       enum: ["Point"],

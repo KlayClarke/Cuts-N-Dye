@@ -4,7 +4,7 @@ const map = new mapboxgl.Map({
   container: "map",
   style: "mapbox://styles/mapbox/streets-v11",
   zoom: 16,
-  center: salon.salonLocation.coordinates,
+  center: salon.geometry.coordinates,
   pitch: 60,
   antialias: true, // create the gl context with MSAA antialiasing, so custom layers are antialiased
 });
@@ -12,14 +12,14 @@ const map = new mapboxgl.Map({
 map.addControl(new mapboxgl.FullscreenControl());
 
 const marker1 = new mapboxgl.Marker()
-  .setLngLat(salon.salonLocation.coordinates)
+  .setLngLat(salon.geometry.coordinates)
   .setPopup(
     new mapboxgl.Popup({ offset: 25 }).setHTML(`<h5>${salon.salonName}</h5>`)
   )
   .addTo(map);
 
 // parameters to ensure the model is georeferenced correctly on the map
-const modelOrigin = salon.salonLocation.coordinates;
+const modelOrigin = salon.geometry.coordinates;
 const modelAltitude = 0;
 const modelRotate = [Math.PI / 2, 0, 0];
 
