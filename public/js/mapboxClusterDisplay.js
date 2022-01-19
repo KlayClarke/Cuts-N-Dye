@@ -91,9 +91,7 @@ map.on("load", () => {
   // description HTML from its properties.
   map.on("click", "unclustered-point", (e) => {
     const coordinates = e.features[0].geometry.coordinates.slice();
-    const salon = e;
-    console.log(salon);
-    const averagePrice = e;
+    const salonPopupText = e.features[0].properties.mapPopupHTML;
     // const mag = e.features[0].properties.mag;
     // const tsunami = e.features[0].properties.tsunami === 1 ? "yes" : "no";
 
@@ -104,7 +102,10 @@ map.on("load", () => {
       coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
     }
 
-    new mapboxgl.Popup().setLngLat(coordinates).setHTML(salon).addTo(map);
+    new mapboxgl.Popup()
+      .setLngLat(coordinates)
+      .setHTML(`${salonPopupText}`)
+      .addTo(map);
   });
 
   map.on("mouseenter", "clusters", () => {
