@@ -49,3 +49,7 @@
   height: 325px;
   width: 325px;
 }
+
+.remove-underline {
+  text-decoration: none;
+}
