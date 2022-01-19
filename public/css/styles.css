@@ -17,17 +17,21 @@
 }
 
 .default-shadow {
-  box-shadow: 0 8px 32px rgba(233, 233, 233, 0.68);
+  box-shadow: 0 8px 16px rgba(235, 235, 235, 0.68);
+}
+
+.navbar-shadow {
+  box-shadow: 0 0 5px rgb(169, 169, 169);
 }
 
 .salon-index:hover {
-  box-shadow: 0 8px 32px rgba(233, 233, 233, 0.68);
+  box-shadow: 0 8px 16px rgba(233, 233, 233, 0.68);
   cursor: pointer;
   transition: 0.5s;
 }
 
 .smooth {
-  border-radius: 5px;
+  border-radius: 10px;
 }
 
 .index-img-div {
