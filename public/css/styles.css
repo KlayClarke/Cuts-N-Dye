@@ -53,3 +53,46 @@
 .remove-underline {
   text-decoration: none;
 }
+
+.window {
+  z-index: 4;
+  background-color: white;
+  box-shadow: 0 8px 16px rgba(196, 196, 196, 0.68);
+  width: 400px;
+  height: 300px;
+  position: fixed;
+
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.window .window-bar {
+  height: 40px;
+  padding-left: 6px;
+  padding-top: 3px;
+  cursor: move;
+  color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.window .window-bar .window-close {
+  cursor: pointer;
+  display: inline-block;
+  position: absolute;
+  top: 3px;
+  right: 3px;
+  width: 14px;
+  height: 14px;
+  padding-left: 2px;
+  padding-top: 2px;
+}
+
+.window-body {
+  margin: 1em;
+}
