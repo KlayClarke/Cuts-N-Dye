@@ -4,6 +4,10 @@
   box-sizing: border-box;
 }
 
+body {
+  font-family: "Montserrat", sans-serif;
+}
+
 /* NAVIGATION BAR */
 /*  */
 
@@ -137,8 +141,8 @@
   background: rgb(238, 208, 174);
   background: linear-gradient(
     50deg,
-    rgba(194, 169, 140, 0.783) 0%,
-    rgba(193, 36, 43, 0.756) 70%
+    rgba(203, 177, 147, 0.653) 0%,
+    rgba(133, 209, 232, 0.783) 70%
   );
   color: darkgray;
   display: flex;
