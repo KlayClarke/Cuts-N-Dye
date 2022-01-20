@@ -73,7 +73,7 @@ app.use("/salons", salonRoutes);
 app.use("/salons/:id/reviews", reviewRoutes);
 
 app.get("/", (req, res) => {
-  res.render("salons/home");
+  res.redirect("/salons");
 });
 
 app.all("*", (req, res, next) => {
