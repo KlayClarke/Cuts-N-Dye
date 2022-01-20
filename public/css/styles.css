@@ -136,9 +136,9 @@
   height: 28vh;
   background: rgb(238, 208, 174);
   background: linear-gradient(
-    90deg,
-    rgba(238, 208, 174, 1) 0%,
-    rgba(253, 92, 99, 1) 70%
+    50deg,
+    rgba(194, 169, 140, 0.783) 0%,
+    rgba(193, 36, 43, 0.756) 70%
   );
   color: darkgray;
   display: flex;
