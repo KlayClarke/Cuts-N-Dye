@@ -9,8 +9,8 @@ mapboxgl.accessToken = mapboxToken;
 
 const map = new mapboxgl.Map({
   style: "mapbox://styles/mapbox/streets-v11",
-  center: [-95, 37],
-  zoom: 3.8,
+  center: [-73.408157, 41.117744],
+  zoom: 8.2,
   pitch: 45,
   bearing: 0,
   container: "map",
