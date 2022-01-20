@@ -1,4 +1,4 @@
-<nav
+<!-- <nav
   class="navbar sticky-top navbar-expand-lg navbar-light bg-light navbar-shadow"
 >
   <div class="container-fluid">
@@ -19,14 +19,32 @@
         <a class="nav-link" aria-current="page" href="/">Home</a>
       </div>
       <div class="navbar-nav ms-auto">
-        <% if(!currentUser) { %>
         <a class="nav-link" href="#">Register</a>
         <a class="nav-link" id="windowtoggle" href="#">Login</a>
-        <% } else { %>
-        <a class="nav-link" href="#"><%= currentUser.username %> </a>
+
+        <a class="nav-link" href="#"> </a>
         <a class="nav-link" href="/logout">Logout</a>
-        <% } %>
       </div>
     </div>
   </div>
-</nav>
+</nav> -->
+<div class="nav">
+  <div class="nav-contain">
+    <div class="logo">
+      <a href="/salons">
+        <h1>FRESHEN</h1>
+      </a>
+    </div>
+    <nav>
+      <ul>
+        <% if(!currentUser) { %>
+        <li><a href="#">Register</a></li>
+        <li><a href="#" id="windowtoggle">Login</a></li>
+        <% } else { %>
+        <li><a href="#"><%= currentUser.username %> </a></li>
+        <li><a href="/logout">Logout</a></li>
+        <% } %>
+      </ul>
+    </nav>
+  </div>
+</div>
