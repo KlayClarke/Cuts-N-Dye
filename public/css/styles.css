@@ -37,6 +37,12 @@ body {
   box-shadow: 0 0 5px rgb(169, 169, 169);
 }
 
+.salon-index {
+  height: 180px;
+  display: flex;
+  justify-content: center;
+}
+
 .salon-index:hover {
   box-shadow: 0 8px 16px rgba(233, 233, 233, 0.68);
   cursor: pointer;
