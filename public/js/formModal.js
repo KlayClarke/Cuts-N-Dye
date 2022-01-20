@@ -1,10 +1,15 @@
+const loginButton = document.querySelectorAll("#windowtoggle");
+const xResult = loginButton[0].getBoundingClientRect().x;
+const yResult = loginButton[0].getBoundingClientRect().y;
+
 let state = {
   isDragging: false,
   isHidden: true,
   xDiff: 0,
   yDiff: 0,
-  x: 50,
-  y: 50,
+  // to display modal under login button at all times
+  x: xResult - 334.9317626953125,
+  y: yResult + 52.002840995788574,
 };
 
 let intViewportWidth = window.innerWidth;
@@ -85,8 +90,10 @@ ready(function () {
   closeButton[0].addEventListener("click", closeWindow);
 
   let toggleButton = document.getElementById("windowtoggle");
-  toggleButton.addEventListener("click", function () {
-    state.isHidden = !state.isHidden;
-    renderWindow(w, state);
-  });
+  if (toggleButton) {
+    toggleButton.addEventListener("click", function () {
+      state.isHidden = !state.isHidden;
+      renderWindow(w, state);
+    });
+  }
 });
