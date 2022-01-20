@@ -1,13 +1,69 @@
 mapboxgl.accessToken = mapboxToken;
 
+// const map = new mapboxgl.Map({
+//   container: "map",
+//   style: "mapbox://styles/mapbox/streets-v11",
+//   center: [-95, 39],
+//   zoom: 3.8,
+// });
+
 const map = new mapboxgl.Map({
-  container: "map",
   style: "mapbox://styles/mapbox/streets-v11",
-  center: [-95, 39],
+  center: [-95, 37],
   zoom: 3.8,
+  pitch: 45,
+  bearing: 0,
+  container: "map",
+  antialias: true,
 });
 
 map.on("load", async () => {
+  // Insert the layer beneath any symbol layer.
+  const layers = map.getStyle().layers;
+  const labelLayerId = layers.find(
+    (layer) => layer.type === "symbol" && layer.layout["text-field"]
+  ).id;
+
+  // The 'building' layer in the Mapbox Streets
+  // vector tileset contains building height data
+  // from OpenStreetMap.
+  map.addLayer(
+    {
+      id: "add-3d-buildings",
+      source: "composite",
+      "source-layer": "building",
+      filter: ["==", "extrude", "true"],
+      type: "fill-extrusion",
+      minzoom: 15,
+      paint: {
+        "fill-extrusion-color": "#aaa",
+
+        // Use an 'interpolate' expression to
+        // add a smooth transition effect to
+        // the buildings as the user zooms in.
+        "fill-extrusion-height": [
+          "interpolate",
+          ["linear"],
+          ["zoom"],
+          15,
+          0,
+          15,
+          ["get", "height"],
+        ],
+        "fill-extrusion-base": [
+          "interpolate",
+          ["linear"],
+          ["zoom"],
+          15,
+          0,
+          15,
+          ["get", "min_height"],
+        ],
+        "fill-extrusion-opacity": 0.6,
+      },
+    },
+    labelLayerId
+  );
   // Add a new source from our GeoJSON data and
   // set the 'cluster' option to true. GL-JS will
   // add the point_count property to your source data.
@@ -17,7 +73,7 @@ map.on("load", async () => {
     // from 12/22/15 to 1/21/16 as logged by USGS' Earthquake hazards program.
     data: salons,
     cluster: true,
-    clusterMaxZoom: 14, // Max zoom to cluster points on
+    clusterMaxZoom: 20, // Max zoom to cluster points on
     clusterRadius: 50, // Radius of each cluster when clustering points (defaults to 50)
   });
 
