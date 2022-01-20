@@ -15,12 +15,7 @@ body {
   z-index: 10;
   width: 100%;
   color: rgba(255, 255, 255, 0.543);
-  background: rgba(255, 255, 255, 0.906);
-  /* background: linear-gradient(
-    50deg,
-    rgb(222, 205, 185) 0%,
-    rgb(165, 200, 211) 70%
-  ); */
+  background: rgb(255, 255, 255);
   position: fixed;
   top: 0;
   left: 0;
@@ -52,6 +47,8 @@ nav ul li a,
 
 .nav .logo a {
   text-decoration: line-through;
+  text-decoration-color: rgba(255, 183, 0, 0.55);
+  text-decoration-thickness: 6px;
 }
 
 nav ul li a {
