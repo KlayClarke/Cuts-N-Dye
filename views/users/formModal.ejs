@@ -1,0 +1,47 @@
+<div class="window card" id="window">
+  <div class="window-bar card-header">
+    <span class="window-close">
+      <svg
+        viewport="0 0 12 12"
+        version="1.1"
+        width="16"
+        height="16"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <line x1="1" y1="11" x2="11" y2="1" stroke="black" strokeWidth="2" />
+        <line x1="1" y1="1" x2="11" y2="11" stroke="black" strokeWidth="2" />
+      </svg>
+    </span>
+  </div>
+  <div class="window-body card-body">
+    <h1>Login</h1>
+    <div class="user-reg">
+      <form action="/login" method="post" class="validated-form" novalidate>
+        <div class="mb-3">
+          <label for="username" class="form-label">Username</label>
+          <input
+            type="text"
+            id="username"
+            name="username"
+            class="form-control"
+            required
+          />
+          <div class="invalid-feedback">Username Required</div>
+        </div>
+
+        <div class="mb-3">
+          <label for="password" class="form-label">Password</label>
+          <input
+            type="password"
+            class="form-control"
+            id="password"
+            name="password"
+            required
+          />
+          <div class="invalid-feedback">Password Required</div>
+        </div>
+        <button type="submit" class="btn btn-warning">Login To Account</button>
+      </form>
+    </div>
+  </div>
+</div>
