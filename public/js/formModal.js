@@ -8,8 +8,8 @@ let state = {
   xDiff: 0,
   yDiff: 0,
   // to display modal under login button at all times
-  x: xResult - 334.9317626953125,
-  y: yResult + 52.002840995788574,
+  x: xResult - 175.9317626953125,
+  y: yResult + 80.002840995788574,
 };
 
 let intViewportWidth = window.innerWidth;

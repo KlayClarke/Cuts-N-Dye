@@ -15,6 +15,16 @@ module.exports.createNewSalon = async (req, res, next) => {
   const location = await findLocation(req, salon);
   salon.geometry = location;
   salon.salonAuthor = req.user._id;
+  if (salon.salonImage === "" || salon.salonImage === undefined) {
+    let lat = location[1];
+    let long = location[0];
+    fetch(
+      `https://maps.googleapis.com/maps/api/streetview?size=400x400&location=${lat},${long}&\
+      fov=80&heading=70&pitch=0&amp;key=${process.env.STREET_VIEW_API_KEY}&amp;signature=${process.env.STREET_VIEW_API_SIGNATURE}`
+    )
+      .then((res) => res.json())
+      .then((data) => console.log(data));
+  }
   await salon.save();
   req.flash("success", "Successfully added new salon!");
   res.redirect(`/salons/${salon._id}`);
