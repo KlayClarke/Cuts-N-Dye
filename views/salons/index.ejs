@@ -1,41 +1,42 @@
 <% layout('layouts/boilerplate') %>
-<div id="map" class="smooth default-shadow index-map"></div>
-<h3 class="mb-3 mt-3">
-  <a href="/salons/new" class="plus-button">+</a>
-</h3>
-<% for(let salon of salons) { %>
-<div class="card mb-3 salon-index smooth">
-  <div class="row">
-    <div class="col-md-3 index-img-div">
-      <% if(salon.salonImage.trim()) { %>
-      <img
-        src="<%= salon.salonImage %> "
-        alt=""
-        class="img-fluid index-img-size smooth"
-      />
-      <% } %>
-    </div>
-    <div class="col-md-3">
-      <div class="card-body">
-        <h5 class="card-title"><%= salon.salonName %></h5>
+<div class="map-wrapper">
+    <div id="map" class="index-map"></div>
+</div>
+<h3><a href="/salons/new" class="create-button">Add Salon To Database</a></h3>
+<section class="all-salons-index">
+  <% for(let salon of salons) { %>
+  <div class="index-card">
+    <div class="row">
+      <div class="col-md-3 index-img-div">
+        <% if(salon.salonImage.trim()) { %>
+        <img
+          src="<%= salon.salonImage %> "
+          alt=""
+          class="img-fluid index-img-size smooth"
+        />
+        <% } %>
+      </div>
+      <div class="col-md-3">
+        <div class="index-card-body">
+          <h5 class="index-card-title"><%= salon.salonName %></h5>
 
-        <p class="card-text"><%= salon.salonType %></p>
-        <p class="card-text">
-          <small class="text-muted">
-            <%= `${salon.salonStreetAddress} ${salon.salonCity},
-            ${salon.salonState} ${salon.salonZipCode}` %></small
-          >
-        </p>
-        <a class="stretched-link" href=" /salons/<%= salon._id  %>  "
-          ><%= salon.title %>
-        </a>
+          <p class="index-card-text"><%= salon.salonType %></p>
+          <p class="index-card-text">
+            <small>
+              <%= `${salon.salonStreetAddress} ${salon.salonCity},
+              ${salon.salonState} ${salon.salonZipCode}` %></small
+            >
+          </p>
+          <a href=" /salons/<%= salon._id  %>  "><%= salon.title %> </a>
+        </div>
       </div>
     </div>
   </div>
-</div>
-<% }%>
-<script>
-  const mapboxToken = "<%-process.env.MAPBOX_TOKEN%>";
-  const salons = {features: <%-JSON.stringify(salons)%>};
-</script>
-<script src="/js/mapboxClusterDisplay.js"></script>
+  <% }%>
+</section>
+  <script>
+    const mapboxToken = "<%-process.env.MAPBOX_TOKEN%>";
+    const salons = {features: <%-JSON.stringify(salons)%>};
+  </script>
+  <script src="/js/mapboxClusterDisplay.js"></script>
+</section>

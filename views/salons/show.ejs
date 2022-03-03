@@ -13,31 +13,27 @@
       </div>
     </div>
     <% } %>
-    <div class="card mt-3 default-shadow smooth">
-      <div class="card-header">
+    <div class="show-card">
+      <div class="show-card-header">
         <%= salon.salonType %> <br />
         <span class="avg-price">$<%= salon.salonAveragePrice %></span>
       </div>
-      <div class="card-body">
-        <h5 class="card-title"><%= salon.salonName %></h5>
-        <p class="card-text">
+      <div class="show-card-body">
+        <h5 class="show-card-title"><%= salon.salonName %></h5>
+        <p class="show-card-text">
           <%= `${salon.salonStreetAddress} ${salon.salonCity},
           ${salon.salonState} ${salon.salonZipCode}` %>
         </p>
-        <p class="text-muted">Submitted by <%= salon.salonAuthor.username %></p>
+        <p>Submitted by <%= salon.salonAuthor.username %></p>
         <% if(currentUser && salon.salonAuthor.equals(currentUser._id)) { %>
         <div>
-          <a
-            href="/salons/<%= salon._id %>/edit "
-            class="btn btn-outline-warning mb-3"
-            >Edit</a
-          >
+          <a href="/salons/<%= salon._id %>/edit " class="btn edit-btn">Edit</a>
           <form
             class="d-inline"
             action="/salons/<%= salon._id  %>?_method=DELETE"
             method="post"
           >
-            <button class="btn btn-outline-danger mb-3">Delete</button>
+            <button class="btn delete-btn">Delete</button>
           </form>
         </div>
         <% } %>

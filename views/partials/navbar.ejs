@@ -1,20 +1,14 @@
-<div class="nav">
-  <div class="nav-contain">
-    <div class="logo">
-      <a href="/salons">
-        <h1>FRESHER</h1>
-      </a>
-    </div>
-    <nav>
-      <ul>
-        <% if(!currentUser) { %>
-        <li><a href="#">Register</a></li>
-        <li><a href="#" id="windowtoggle">Login</a></li>
-        <% } else { %>
-        <li><a href="#"><%= currentUser.username %> </a></li>
-        <li><a href="/logout">Logout</a></li>
-        <% } %>
-      </ul>
-    </nav>
-  </div>
-</div>
+<nav>
+  <a href="/salons">
+    <h1>FRESHER</h1>
+  </a>
+  <ul>
+    <% if(!currentUser) { %>
+    <li><a href="#">Register</a></li>
+    <li><a href="#" id="windowtoggle">Login</a></li>
+    <% } else { %>
+    <li><a href="#"><%= currentUser.username %> </a></li>
+    <li><a href="/logout">Logout</a></li>
+    <% } %>
+  </ul>
+</nav>
