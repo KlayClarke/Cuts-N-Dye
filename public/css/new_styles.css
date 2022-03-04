@@ -5,7 +5,7 @@
 }
 
 body {
-  font-family: "Lato", sans-serif;
+  font-family: "Open Sans", sans-serif;
 }
 
 a {
@@ -13,7 +13,8 @@ a {
   color: black;
 }
 
-a:hover {
+nav a:hover,
+footer a:hover {
   text-decoration: underline;
 }
 
